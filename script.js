@@ -1,10 +1,24 @@
 'use strict';
 
-let secretNumber = Math.trunc(Math.random()*20)+1;
+
 let score = 10;
 let highscore = 0;
+let maxRange = document.getElementById("rangeSlider").value;
+let secretNumber = Math.trunc(Math.random()*maxRange)+1;
+
+
+let slider = document.getElementById('rangeSlider');
+slider.addEventListener('input', sliderChange);
+
+
+
+
+//adding text display for min and max ranges
+document.querySelector('.sliderMin').textContent = '1';
+document.querySelector('.sliderMax').textContent = maxRange;
 
 document.querySelector('.number').textContent = '?'; //change this to hide secret number
+
 document.querySelector('.check').addEventListener('click', function(){
     const guess = Number(document.querySelector('.guess').value);    
     
@@ -24,8 +38,6 @@ document.querySelector('.check').addEventListener('click', function(){
         }
         document.querySelector('.highscore').textContent = highscore;
 
-        
-
         //when guess too high
     } else if (guess > secretNumber){
         document.querySelector('.message').textContent = 'Too High!';
@@ -40,11 +52,19 @@ document.querySelector('.check').addEventListener('click', function(){
 })
 
 
-document.querySelector('.again').addEventListener('click', function(){
-    secretNumber = Math.trunc(Math.random()*20)+1;
+document.querySelector('.generate').addEventListener('click', function(){
+    secretNumber = Math.trunc(Math.random()*maxRange)+1;
     score = 10;
     document.querySelector('body').style.backgroundColor = '#222';
     document.querySelector('.guess').textContent = '';
     document.querySelector('.score').textContent = score;
     document.querySelector('.number').textContent = '?'; //change this to hide number
 })
+
+
+function sliderChange() {
+    document.querySelector('.sliderMax').textContent = this.value;
+    secretNumber = Math.trunc(Math.random()*maxRange)+1;
+    maxRange = this.value;
+    document.querySelector('.between').textContent = `(Between 1 and ${this.value})`;
+}
