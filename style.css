@@ -97,6 +97,16 @@ h1 {
   width: 20%;
   top: 2em;
   left: 40%;
+  background: #eee;
+}
+
+#rangeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4caf50;
 }
 
 .sliderMax {
